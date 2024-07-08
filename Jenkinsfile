@@ -18,5 +18,13 @@ pipeline{
 				git branch: 'main', url: 'https://github.com/ajaykondaveeti12/zomato.git'
 			}
 		}
+		stage("SonarQube Code Analysis"){
+			steps{
+				withSonarQubeEnv('sonar-scanner'){
+					sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=zomato-project \
+                    -Dsonar.projectKey=zomato-project '''
+				}
+			}
+		}
 	}
 }
